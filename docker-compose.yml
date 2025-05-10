@@ -5,7 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: n8n
+    container_name: n8n-chromium
+
     restart: unless-stopped
     ports:
       - "5678:5678"
