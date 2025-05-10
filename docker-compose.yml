@@ -4,19 +4,21 @@ services:
   n8n:
     build:
       context: .
-      dockerfile: Dockerfile
-    container_name: n8n-chromium
-
+      dockerfile: Dockerfile          # ← 이미 작성해둔 Dockerfile 사용
+    container_name: n8n
     restart: unless-stopped
     ports:
-      - "5678:5678"
+      - "5678:5678"                   # 왼쪽 숫자를 5680 등으로 바꿔도 됨
     environment:
       - TZ=Asia/Seoul
       - GENERIC_TIMEZONE=Asia/Seoul
       - NODE_FUNCTION_ALLOW_EXTERNAL=puppeteer
       - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+      - N8N_HOST=n8n.inbecs.com
+      - N8N_PROTOCOL=https
+      - WEBHOOK_URL=https://n8n.inbecs.com/
     volumes:
-      - n8n_data:/home/node/.n8n
+      - n8n_data:/home/node/.n8n      # 기존 데이터 볼륨
 
 volumes:
   n8n_data:
